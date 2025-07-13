@@ -8,16 +8,16 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.WorldSource;
 
-public class BambooScaffoldModel<T extends BlockLogic> extends BlockModelBackFaceRenderable<T> {
+public class BlockModelScaffolding<T extends BlockLogic> extends BlockModelBackFaceRenderable<T> {
 
     protected IconCoordinate sideReg;
     protected IconCoordinate sideHang;
     protected IconCoordinate empty;
 
-    public BambooScaffoldModel(Block<T> block, boolean renderInside) {
+    public BlockModelScaffolding(Block<T> block, boolean renderInside, String mat) {
         super(block, renderInside);
-        this.sideReg = TextureRegistry.getTexture("scaffold:block/scaffolding/bamboo/side");
-        this.sideHang = TextureRegistry.getTexture("scaffold:block/scaffolding/bamboo/side_hang");
+        this.sideReg = TextureRegistry.getTexture("scaffold:block/scaffolding/"+mat+"/side");
+        this.sideHang = TextureRegistry.getTexture("scaffold:block/scaffolding/"+mat+"/side_hang");
         this.empty = TextureRegistry.getTexture("scaffold:block/empty");
     }
 
@@ -34,16 +34,18 @@ public class BambooScaffoldModel<T extends BlockLogic> extends BlockModelBackFac
         
             default:
             {
+                //check the side trying to be rendered, don't render support/hang/legs between blocks
+                Block<?> b = blockAccess.getBlock(x+side.getOffsetX(), y, z+side.getOffsetZ());
+                if(b != null && b.getMaterial() != Material.air) return empty;
+
                 //no air below block? no problem render the legs!
                 if (blockAccess.getBlockMaterial(x, y - 1, z) != Material.air) {
                  return sideReg;
                 }
 
-                //this block is not hanging, don't render support/hang/legs between blocks
-                //check the side trying to be rendered
-                Block<?> b = blockAccess.getBlock(x+side.getOffsetX(), y, z+side.getOffsetZ());
-                if(b == null || b.getMaterial() == Material.air){return sideHang;}
-                return empty;
+                //this block is hanging
+                return sideHang;
+                
             }
                 
         }

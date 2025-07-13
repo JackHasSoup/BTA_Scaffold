@@ -88,7 +88,7 @@ public class BlockLogicScaffolding extends BlockLogicTransparent {
 
             }
 
-            world.setBlockAndMetadataWithNotify(x, ytop, z, this.block.id(), 0);
+            world.setBlockWithNotify(x, ytop, z, this.block.id());
         }else{
             Direction d = player.getHorizontalPlacementDirection(side);
             int xo = d.getOffsetX();
@@ -149,7 +149,7 @@ public class BlockLogicScaffolding extends BlockLogicTransparent {
             }
             if (!hasSupport) return false;
 
-            world.setBlockAndMetadataWithNotify(placeX, placeY, placeZ, this.id(), 0);
+            world.setBlockWithNotify(placeX, placeY, placeZ, this.id());
         }
         
             //use item

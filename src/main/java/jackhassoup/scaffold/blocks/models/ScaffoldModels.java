@@ -7,14 +7,10 @@ import net.minecraft.client.render.TileEntityRenderDispatcher;
 import net.minecraft.client.render.block.color.BlockColorDispatcher;
 import net.minecraft.client.render.block.model.*;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
-import net.minecraft.client.render.item.model.ItemModelStandard;
-import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.util.helper.Side;
 import turniplabs.halplibe.helper.ModelHelper;
 import turniplabs.halplibe.util.ModelEntrypoint;
 
-import static jackhassoup.scaffold.ScaffoldMod.MOD_ID;
-import static jackhassoup.scaffold.ScaffoldMod.LOGGER;;
 
 public class ScaffoldModels implements ModelEntrypoint {
 
@@ -23,10 +19,31 @@ public class ScaffoldModels implements ModelEntrypoint {
 
         ModelHelper.setBlockModel(
                 ScaffoldBlocks.SCAFFOLD_BAMBOO,
-                () -> new BambooScaffoldModel<>(ScaffoldBlocks.SCAFFOLD_BAMBOO, true)
+                () -> new BlockModelScaffolding<>(ScaffoldBlocks.SCAFFOLD_BAMBOO, true, "bamboo")
                         .setTex(0, "scaffold:block/scaffolding/bamboo/side", Side.sides)
                         .setTex(0, "scaffold:block/scaffolding/bamboo/top", Side.TOP)
                         .setTex(0, "scaffold:block/scaffolding/bamboo/bottom", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.SCAFFOLD_PAPER,
+            () -> new BlockModelScaffolding<>(ScaffoldBlocks.SCAFFOLD_PAPER, true, "paper")
+                    .setTex(0, "scaffold:block/scaffolding/paper/side", Side.sides)
+                    .setTex(0, "scaffold:block/scaffolding/paper/top", Side.TOP)
+                    .setTex(0, "scaffold:block/scaffolding/paper/bottom", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.SCAFFOLD_WOOD_PAINTED,
+            () -> new BlockModelColouredScaffolding<>(ScaffoldBlocks.SCAFFOLD_WOOD_PAINTED, true, "wood")
+                    .setTex(0, "scaffold:block/scaffolding/wood/oak/side", Side.sides)
+                    .setTex(0, "scaffold:block/scaffolding/wood/oak/top", Side.TOP)
+                    .setTex(0, "scaffold:block/scaffolding/wood/oak/bottom", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.SCAFFOLD_WOOD,
+            () -> new BlockModelScaffolding<>(ScaffoldBlocks.SCAFFOLD_WOOD, true, "wood/oak")
+                    .setTex(0, "scaffold:block/scaffolding/wood/oak/side", Side.sides)
+                    .setTex(0, "scaffold:block/scaffolding/wood/oak/top", Side.TOP)
+                    .setTex(0, "scaffold:block/scaffolding/wood/oak/bottom", Side.BOTTOM));
     }
 
     @Override
