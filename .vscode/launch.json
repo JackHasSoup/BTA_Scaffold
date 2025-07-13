@@ -10,7 +10,7 @@
       "stopOnEntry": false,
       "mainClass": "net.fabricmc.devlaunchinjector.Main",
       "vmArgs": "-Dfabric.dli.config\u003dD:\\Documents\\Code\\MCMods\\BTA_Scaffold\\.gradle\\loom-cache\\launch.cfg -Dfabric.dli.env\u003dclient -Dfabric.dli.main\u003dnet.fabricmc.loader.impl.launch.knot.KnotClient",
-      "args": "",
+      "args": "--username JackHasSoup",
       "env": {},
       "projectName": "BTA_Scaffold"
     },

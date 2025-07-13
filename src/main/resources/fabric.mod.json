@@ -16,21 +16,25 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "jackhassoup.scaffold.ExampleMod"
+      "jackhassoup.scaffold.ScaffoldMod"
     ],
     "beforeGameStart": [
-      "jackhassoup.scaffold.ExampleMod"
+      "jackhassoup.scaffold.ScaffoldMod"
     ],
     "afterGameStart": [
-      "jackhassoup.scaffold.ExampleMod"
+      "jackhassoup.scaffold.ScaffoldMod"
     ],
     "recipesReady": [
-      "jackhassoup.scaffold.ExampleMod"
+      "jackhassoup.scaffold.ScaffoldMod"
+    ],
+    "afterItemInit": [
+      "jackhassoup.scaffold.ScaffoldMod"
+    ],
+    "initModels" : [
+      "jackhassoup.scaffold.blocks.models.ScaffoldModels"
     ]
   },
-  "mixins": [
-    "scaffold.mixins.json"
-  ],
+  "mixins": [],
   "depends": {
     "minecraft": "*",
     "fabricloader": ">=0.15.5"
