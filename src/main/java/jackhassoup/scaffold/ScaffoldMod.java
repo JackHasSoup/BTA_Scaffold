@@ -1,4 +1,4 @@
-package turniplabs.examplemod;
+package jackhassoup.scaffold;
 
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -7,14 +7,14 @@ import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
+public class ScaffoldMod implements ModInitializer, RecipeEntrypoint, GameStartEntrypoint {
+	public static final String MOD_ID = "scaffold";
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-public class ExampleMod implements ModInitializer, RecipeEntrypoint, GameStartEntrypoint {
-    public static final String MOD_ID = "examplemod";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-    @Override
-    public void onInitialize() {
-        LOGGER.info("ExampleMod initialized.");
-    }
+	@Override
+	public void onInitialize() {
+		LOGGER.info("Scaffold initialized.");
+	}
 
 	@Override
 	public void onRecipesReady() {

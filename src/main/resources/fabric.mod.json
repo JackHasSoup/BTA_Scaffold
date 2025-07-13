@@ -1,44 +1,39 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "scaffold",
   "version": "${version}",
-
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Scaffold",
+  "description": "This mod aims to add survival building tools.",
   "authors": [
-    "Turnip Labs"
+    "JackHasSoup"
   ],
   "contact": {
     "homepage": "",
     "sources": ""
   },
-
-	"icon": "icon.png",
+  "icon": "icon.png",
   "license": "CC0-1.0",
-
   "environment": "*",
   "entrypoints": {
     "main": [
-			"turniplabs.examplemod.ExampleMod"
+      "jackhassoup.scaffold.ExampleMod"
     ],
-		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
-		],
-		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
-		],
-		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
-		]
-	},
+    "beforeGameStart": [
+      "jackhassoup.scaffold.ExampleMod"
+    ],
+    "afterGameStart": [
+      "jackhassoup.scaffold.ExampleMod"
+    ],
+    "recipesReady": [
+      "jackhassoup.scaffold.ExampleMod"
+    ]
+  },
   "mixins": [
-      "examplemod.mixins.json"
+    "scaffold.mixins.json"
   ],
-
   "depends": {
-		"minecraft": "*",
+    "minecraft": "*",
     "fabricloader": ">=0.15.5"
   },
-  "suggests": {
-  }
+  "suggests": {}
 }
