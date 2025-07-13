@@ -41,7 +41,7 @@ public class BambooScaffoldModel<T extends BlockLogic> extends BlockModelBackFac
 
                 //this block is not hanging, don't render support/hang/legs between blocks
                 //check the side trying to be rendered
-                Block b = blockAccess.getBlock(x+side.getOffsetX(), y, z+side.getOffsetZ());
+                Block<?> b = blockAccess.getBlock(x+side.getOffsetX(), y, z+side.getOffsetZ());
                 if(b == null || b.getMaterial() == Material.air){return sideHang;}
                 return empty;
             }

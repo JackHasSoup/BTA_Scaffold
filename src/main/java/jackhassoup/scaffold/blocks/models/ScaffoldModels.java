@@ -22,8 +22,8 @@ public class ScaffoldModels implements ModelEntrypoint {
     public void initBlockModels(BlockModelDispatcher dispatcher) {
 
         ModelHelper.setBlockModel(
-                ScaffoldBlocks.BAMBOO_SCAFFOLD,
-                () -> new BambooScaffoldModel<>(ScaffoldBlocks.BAMBOO_SCAFFOLD, true)
+                ScaffoldBlocks.SCAFFOLD_BAMBOO,
+                () -> new BambooScaffoldModel<>(ScaffoldBlocks.SCAFFOLD_BAMBOO, true)
                         .setTex(0, "scaffold:block/scaffolding/bamboo/side", Side.sides)
                         .setTex(0, "scaffold:block/scaffolding/bamboo/top", Side.TOP)
                         .setTex(0, "scaffold:block/scaffolding/bamboo/bottom", Side.BOTTOM));

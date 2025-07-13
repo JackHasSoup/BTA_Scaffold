@@ -1,15 +1,12 @@
 package jackhassoup.scaffold.blocks;
 
-import java.util.List;
-
+import net.minecraft.client.entity.player.PlayerLocal;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.block.BlockLogicFullyRotatable;
 import net.minecraft.core.block.BlockLogicTransparent;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.EnumBlockSoundEffectType;
-import net.minecraft.core.enums.PlacementMode;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.util.helper.Direction;
@@ -18,12 +15,13 @@ import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 
-import static jackhassoup.scaffold.ScaffoldMod.LOGGER;
 
 public class BlockLogicScaffolding extends BlockLogicTransparent {
 
-    public BlockLogicScaffolding(Block<?> block, Material material) {
+    protected final int maxSpan;
+    public BlockLogicScaffolding(Block<?> block, Material material, int maxSpan) {
         super(block, material);
+        this.maxSpan = maxSpan;
     }
 
     @Override
@@ -59,6 +57,7 @@ public class BlockLogicScaffolding extends BlockLogicTransparent {
 
     @Override
     public boolean collidesWithEntity(Entity entity, World world, int x, int y, int z) {
+        if(entity instanceof PlayerLocal && ((PlayerLocal)entity).input == null) return false;
         if(entity.isSneaking() && world.getBlockMaterial(x, y - 1, z) == Material.air) return true;
 
         return !entity.isSneaking() && entity.y - entity.heightOffset > y;
@@ -78,7 +77,7 @@ public class BlockLogicScaffolding extends BlockLogicTransparent {
             //keep going up a block untill either a scaffold can or can't be placed
             while(!reachedTop)
             {
-                Block b = world.getBlock(x, ytop, z);
+                Block<?> b = world.getBlock(x, ytop, z);
                 if(b == null || b.getMaterial() == Material.air){reachedTop = true; break;}
                 if(b.id() == this.block.id())
                 {
@@ -89,35 +88,68 @@ public class BlockLogicScaffolding extends BlockLogicTransparent {
 
             }
 
-            
             world.setBlockAndMetadataWithNotify(x, ytop, z, this.block.id(), 0);
         }else{
             Direction d = player.getHorizontalPlacementDirection(side);
             int xo = d.getOffsetX();
             int zo = d.getOffsetZ();
 
-            if(world.getBlock(x + xo, y, z+zo ) == null){world.setBlockAndMetadataWithNotify(x + xo, y, z+zo , this.id(), 0);}//if its air
-            else if(world.getBlock(x + xo, y, z+zo ).getMaterial() == Material.air){world.setBlockAndMetadataWithNotify(x + xo, y, z+zo , this.id(), 0);}//also if its air
-            else if (world.getBlock(x + xo, y, z+zo ).id() != this.id()) {return false;} //if its a different block exit
-            else{
-                int X = xo;
-                int Z = zo;
-
-                boolean placed = false;
-                //run along placement axis untill either a solid block is hit and the function exits, or air is hit and the block gets placed
-                while(!placed)
-                {
-                    Block b = world.getBlock(x+X, y, z+Z);
-                    if(b == null || b.getMaterial() == Material.air)
-                    {
-                        placed = true;
-                        break;
-                    }
-                    if(b.id() == this.id()){X+=xo; Z+=zo;}else{return false;}
+            // Find where the new block will be placed
+            int X = xo;
+            int Z = zo;
+            while (true) {
+                Block<?> b = world.getBlock(x + X, y, z + Z);
+                if (b == null || b.getMaterial() == Material.air) {
+                    break;
                 }
-                world.setBlockAndMetadataWithNotify(x + X ,y, z+Z , this.id(), 0);
-
+                if (b.id() == this.id()) {
+                    X += xo;
+                    Z += zo;
+                } else {
+                    return false;
+                }
             }
+            int placeX = x + X;
+            int placeY = y;
+            int placeZ = z + Z;
+
+            // Check for support: taxicab distance to nearest support column or ground <= 8
+            boolean hasSupport = false;
+            // BFS to find nearest support within maxSpan
+            java.util.Queue<int[]> queue = new java.util.LinkedList<>();
+            java.util.Set<String> visited = new java.util.HashSet<>();
+            queue.add(new int[]{placeX, placeY, placeZ, 0});
+            visited.add(placeX + "," + placeY + "," + placeZ);
+            while (!queue.isEmpty()) {
+                int[] node = queue.poll();
+                int cx = node[0];
+                int cy = node[1];
+                int cz = node[2];
+                int dist = node[3];
+                if (dist > maxSpan) continue;
+                // Check if directly supported by non-air block below
+                if (world.getBlockMaterial(cx, cy - 1, cz) != Material.air) {
+                    hasSupport = true;
+                    break;
+                }
+                // Add neighbors (horizontal and down)
+                int[][] offsets = { {1,0,0}, {-1,0,0}, {0,0,1}, {0,0,-1}, {0,-1,0} };
+                for (int[] off : offsets) {
+                    int nx = cx + off[0];
+                    int ny = cy + off[1];
+                    int nz = cz + off[2];
+                    String key = nx + "," + ny + "," + nz;
+                    if (ny < 0 || visited.contains(key)) continue;
+                    Block<?> b = world.getBlock(nx, ny, nz);
+                    if (b != null && b.id() == this.id()) {
+                        queue.add(new int[]{nx, ny, nz, dist + 1});
+                        visited.add(key);
+                    }
+                }
+            }
+            if (!hasSupport) return false;
+
+            world.setBlockAndMetadataWithNotify(placeX, placeY, placeZ, this.id(), 0);
         }
         
             //use item

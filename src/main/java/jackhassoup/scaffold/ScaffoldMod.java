@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jackhassoup.scaffold.blocks.ScaffoldBlocks;
-import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.ItemInitEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
