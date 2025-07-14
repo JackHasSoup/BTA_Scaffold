@@ -1,5 +1,7 @@
 package jackhassoup.scaffold;
 
+import static jackhassoup.scaffold.ScaffoldMod.MOD_ID;
+
 import turniplabs.halplibe.util.TomlConfigHandler;
 import turniplabs.halplibe.util.toml.Toml;
 
@@ -43,6 +45,22 @@ public class ScaffoldConfig {
 
         properties.addCategory("Craft amounts");
         properties.addEntry("Craft amounts.scaffold", scaffoldCraftAmount);
+
+        cfg = new TomlConfigHandler(MOD_ID, properties);
+
+        blockIDs = cfg.getInt("Block IDs.startingID");
+        itemIDs = cfg.getInt("Item IDs.startingID");
+
+        bambooScaffoldSpan = cfg.getInt("Scaffold lengths.bamboo");
+        paperScaffoldSpan = cfg.getInt("Scaffold lengths.paper");
+        woodScaffoldSpan = cfg.getInt("Scaffold lengths.wood");
+        cobbleScaffoldSpan = cfg.getInt("Scaffold lengths.cobble");
+        slateScaffoldSpan = cfg.getInt("Scaffold lengths.slate");
+        ironScaffoldSpan = cfg.getInt("Scaffold lengths.iron");
+        steelScaffoldSpan = cfg.getInt("Scaffold lengths.steel");
+        allPlatformSpan = cfg.getInt("Scaffold lengths.all_platforms");
+
+        scaffoldCraftAmount = cfg.getInt("Craft amounts.scaffold");
 
         cfg = new TomlConfigHandler(ScaffoldMod.MOD_ID, properties);
     }
