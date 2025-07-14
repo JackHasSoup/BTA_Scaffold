@@ -72,6 +72,13 @@ public class ScaffoldBlocks {
         SCAFFOLD_SLATE = stoneTier.build("scaffolding_slate", blockID++,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.slateScaffoldSpan));
 
+
+         SCAFFOLD_IRON = metalTier.build("scaffolding_iron", blockID++,
+                (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.ironScaffoldSpan));
+
+        SCAFFOLD_STEEL = metalTier.build("scaffolding_steel", blockID++,
+                (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.steelScaffoldSpan));
+
         //-=-=-=-=-=-=-=- PLATFORMS -=-=-=-=-=-=-=-
         PLATFORM_CLOTH = woodTier.build("platform_cloth", blockID++,
                 (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false));

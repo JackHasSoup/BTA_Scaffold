@@ -48,5 +48,11 @@ tile.scaffold.scaffolding.cobble.desc = Fairly sturdy scaffolding
 tile.scaffold.scaffolding.slate.name = Slate Scaffolding
 tile.scaffold.scaffolding.slate.desc = Very reliable scaffolding made from slate
 
+tile.scaffold.scaffolding.iron.name = Iron Scaffolding
+tile.scaffold.scaffolding.iron.desc = Sturdy scaffolding made from iron
+
+tile.scaffold.scaffolding.steel.name = Steel Scaffolding
+tile.scaffold.scaffolding.steel.desc = Very sturdy scaffolding made from steel
+
 tile.scaffold.platform.cloth.name = Cloth platform
 tile.scaffold.platform.cloth.desc = A platform that allows vertical movement one way, covered with cloth

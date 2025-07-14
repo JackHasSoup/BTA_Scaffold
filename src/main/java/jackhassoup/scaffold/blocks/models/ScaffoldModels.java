@@ -60,6 +60,20 @@ public class ScaffoldModels implements ModelEntrypoint {
                     .setTex(0, "scaffold:block/scaffolding/slate/side", Side.sides)
                     .setTex(0, "scaffold:block/scaffolding/slate/top", Side.TOP)
                     .setTex(0, "scaffold:block/scaffolding/slate/bottom", Side.BOTTOM));
+        
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.SCAFFOLD_IRON,
+            () -> new BlockModelScaffolding<>(ScaffoldBlocks.SCAFFOLD_IRON, true, "iron")
+                    .setTex(0, "scaffold:block/scaffolding/iron/side", Side.sides)
+                    .setTex(0, "scaffold:block/scaffolding/iron/top", Side.TOP)
+                    .setTex(0, "scaffold:block/scaffolding/iron/bottom", Side.BOTTOM));
+        
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.SCAFFOLD_STEEL,
+            () -> new BlockModelScaffolding<>(ScaffoldBlocks.SCAFFOLD_STEEL, true, "steel")
+                    .setTex(0, "scaffold:block/scaffolding/steel/side", Side.sides)
+                    .setTex(0, "scaffold:block/scaffolding/steel/top", Side.TOP)
+                    .setTex(0, "scaffold:block/scaffolding/steel/bottom", Side.BOTTOM));
 
         //-=-=-=-=-=-=-=- PLATFORMS -=-=-=-=-=-=-=-
         ModelHelper.setBlockModel(
