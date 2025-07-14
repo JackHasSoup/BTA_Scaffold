@@ -25,12 +25,12 @@
       "jackhassoup.scaffold.ScaffoldMod"
     ],
     "recipesReady": [
-      "jackhassoup.scaffold.ScaffoldMod"
+      "jackhassoup.scaffold.ScaffoldCraft"
     ],
     "afterItemInit": [
       "jackhassoup.scaffold.ScaffoldMod"
     ],
-    "initModels" : [
+    "initModels": [
       "jackhassoup.scaffold.blocks.models.ScaffoldModels"
     ]
   },

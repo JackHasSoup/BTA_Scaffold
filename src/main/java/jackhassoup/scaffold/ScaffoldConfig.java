@@ -20,6 +20,8 @@ public class ScaffoldConfig {
     public static int ironScaffoldSpan = 16;
     public static int steelScaffoldSpan = 24;
 
+    public static int scaffoldCraftAmount = 6;
+
     static {
         properties.addCategory("scaffold").addEntry("cfgVersion", 1);
 
@@ -38,6 +40,9 @@ public class ScaffoldConfig {
         properties.addEntry("Scaffold lengths.iron", ironScaffoldSpan);
         properties.addEntry("Scaffold lengths.steel", steelScaffoldSpan);
         properties.addEntry("Scaffold lengths.all_platforms", allPlatformSpan);
+
+        properties.addCategory("Craft amounts");
+        properties.addEntry("Craft amounts.scaffold", scaffoldCraftAmount);
 
         cfg = new TomlConfigHandler(ScaffoldMod.MOD_ID, properties);
     }
