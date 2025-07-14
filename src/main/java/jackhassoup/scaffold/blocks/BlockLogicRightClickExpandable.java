@@ -31,7 +31,7 @@ public class BlockLogicRightClickExpandable extends BlockLogicTransparent{
         if(player.isSneaking() && heldItem == null)
         {
             this.harvestBlock(world, player, x, y, z, z, null);
-            world.setBlockWithNotify(x, y, z, 0);
+            world.setBlockAndMetadataWithNotify(x, y, z, 0, 0);
             return false;
         }
 
@@ -56,7 +56,7 @@ public class BlockLogicRightClickExpandable extends BlockLogicTransparent{
 
             }
 
-            world.setBlockWithNotify(x, ytop, z, this.block.id());
+            world.setBlockAndMetadataWithNotify(x, ytop, z, this.block.id(), heldItem.getMetadata());
         }else{
             Direction d = player.getHorizontalPlacementDirection(side);
             int xo = d.getOffsetX();
@@ -84,7 +84,7 @@ public class BlockLogicRightClickExpandable extends BlockLogicTransparent{
             //check if this block would be supported
             if (!this.hasSupport(world, placeX, placeY, placeZ)) return false;
 
-            world.setBlockWithNotify(placeX, placeY, placeZ, this.id());
+            world.setBlockAndMetadataWithNotify(placeX, placeY, placeZ, this.id(), heldItem.getMetadata());
         }
 
         //use item

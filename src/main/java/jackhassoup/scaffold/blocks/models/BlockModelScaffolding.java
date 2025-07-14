@@ -29,17 +29,18 @@ public class BlockModelScaffolding<T extends BlockLogic> extends BlockModelBackF
                 return super.getBlockTexture(blockAccess, x, y, z, side);
             
             case BOTTOM:
-                if (blockAccess.getBlockMaterial(x, y - 1, z) != Material.air) return super.getBlockTexture(blockAccess, x, y, z, side);
+                if (blockAccess.getBlockMaterial(x, y - 1, z).isSolid()) return super.getBlockTexture(blockAccess, x, y, z, side);
                 return empty;
         
             default:
             {
                 //check the side trying to be rendered, don't render support/hang/legs between blocks
                 Block<?> b = blockAccess.getBlock(x+side.getOffsetX(), y, z+side.getOffsetZ());
-                if(b != null && b.getMaterial() != Material.air) return empty; //only hide face on a solid block
+                if(b != null && !b.getMaterial().isSolid()) return empty; //only hide face on a solid block
 
                 //no air below block? no problem render the legs!
-                if (blockAccess.getBlockMaterial(x, y - 1, z) != Material.air) {
+                b = blockAccess.getBlock(x, y - 1, z);
+                if (b != null && (b.getMaterial().isSolid() || b.id() == this.block.id())) {
                  return sideReg;
                 }
 
