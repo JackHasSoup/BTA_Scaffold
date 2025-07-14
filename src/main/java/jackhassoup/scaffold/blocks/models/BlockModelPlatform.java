@@ -12,13 +12,15 @@ import net.minecraft.core.world.WorldSource;
 
 public class BlockModelPlatform<T extends BlockLogic> extends BlockModelBackFaceRenderable<T> {
 
-    protected IconCoordinate sideReg;
+    protected IconCoordinate sideBottom;
+    protected IconCoordinate sideTop;
     protected IconCoordinate empty;
 
     public BlockModelPlatform(Block<T> block, boolean renderInside, String mat) {
         super(block, renderInside);
         
-        this.sideReg = TextureRegistry.getTexture("scaffold:block/platform/"+mat+"/side");
+        this.sideBottom = TextureRegistry.getTexture("scaffold:block/platform/"+mat+"/side");
+        this.sideTop = TextureRegistry.getTexture("scaffold:block/platform/"+mat+"/side_top");
         this.empty = TextureRegistry.getTexture("scaffold:block/empty");
     }
 
@@ -47,9 +49,13 @@ public class BlockModelPlatform<T extends BlockLogic> extends BlockModelBackFace
             {
                 //check the side trying to be rendered, don't render support/hang/legs between blocks
                 Block<?> b = blockAccess.getBlock(x+side.getOffsetX(), y, z+side.getOffsetZ());
-                if(b != null && b.getMaterial() != Material.air) return sideReg; //only hide face on a solid block
+                //if the side is covered by something other than air/null AND if that cover is this block then are they on the same level
+                if(b != null && b.getMaterial() != Material.air){
+                    if (b.id() == block.id() && blockAccess.getBlockMetadata(x+side.getOffsetX(), y, z+side.getOffsetZ()) == blockAccess.getBlockMetadata(x, y, z)) return empty; //only hide face on a solid block
+                } 
 
-                return sideReg;
+                if(blockAccess.getBlockMetadata(x, y, z) == 1){return sideBottom;}
+                return sideTop;
             }
         }
     }
