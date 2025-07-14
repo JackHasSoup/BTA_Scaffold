@@ -129,18 +129,20 @@ public class BlockLogicRightClickExpandable extends BlockLogicTransparent{
             int cz = node[2];
             int dist = node[3];
             if (dist > maxSpan) continue;
-            //check if directly supported by non-air block below
-            if (!supportHorizontal && world.getBlockMaterial(cx, cy - 1, cz).isSolid()) {
-                return true;
-            }else if(supportHorizontal){
-                //check surrounding blocks
-                for(int X = -1; X < 1; X++)
-                {
-                    for(int Z = -1; Z < 1; Z++)
-                    {
-                        if(X==0&&Z==0) continue;//if both 0, that is this block. it can't support itself
-
-                        if(world.getBlockMaterial(X, cy, Z).isSolid() && world.getBlockId(X, cy, Z) != id()) return true;
+            // Check if directly supported by non-air block below
+            if (!supportHorizontal) {
+                if (world.getBlockMaterial(cx, cy - 1, cz).isSolid()) {
+                    return true;
+                }
+            } else if (supportHorizontal) {
+                // Check the 4 cardinal directions for a non-platform, solid block
+                int[][] offsets = { {1,0}, {-1,0}, {0,1}, {0,-1} };
+                for (int[] off : offsets) {
+                    int nx = cx + off[0];
+                    int nz = cz + off[1];
+                    int blockId = world.getBlockId(nx, cy, nz);
+                    if (blockId != this.id() && world.getBlockMaterial(nx, cy, nz).isSolid()) {
+                        return true;
                     }
                 }
             }
