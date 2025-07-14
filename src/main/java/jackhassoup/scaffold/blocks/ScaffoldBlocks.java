@@ -4,6 +4,7 @@ import jackhassoup.scaffold.ScaffoldConfig;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
+import net.minecraft.core.item.block.ItemBlockPainted;
 import net.minecraft.core.sound.BlockSounds;
 import turniplabs.halplibe.helper.BlockBuilder;
 
@@ -30,7 +31,8 @@ public class ScaffoldBlocks {
                 .setResistance(1.0F)
                 .setTags(BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_SWORD, BlockTags.BROKEN_BY_FLUIDS, BlockTags.CAN_HANG_OFF)
                 .setFlammability(20, 35)
-                .setBlockSound(BlockSounds.WOOD);
+                .setBlockSound(BlockSounds.WOOD)
+                .setVisualUpdateOnMetadata();
 
             BlockBuilder stoneTier = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.STONE)
@@ -48,12 +50,17 @@ public class ScaffoldBlocks {
 
         SCAFFOLD_BAMBOO = woodTier.build("scaffolding_bamboo", blockID++,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, 5));
+
         SCAFFOLD_PAPER = woodTier.build("scaffolding_paper", blockID++,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, 4));
-        SCAFFOLD_WOOD_PAINTED = woodTier.build("scaffolding_wood_painted", blockID++,
-                (b) -> new BlockLogicColouredScaffolding(b, Material.decoration, 6));
+
         SCAFFOLD_WOOD = woodTier.build("scaffolding_wood", blockID++,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, 6));
+
+        SCAFFOLD_WOOD_PAINTED = woodTier.build("scaffolding_wood_painted", blockID++,
+                (b) -> new BlockLogicColouredScaffolding(b, Material.decoration, 6))
+                .setBlockItem((b) -> {return new ItemBlockPainted<>(b,false);});
+        
 
         SCAFFOLD_COBBLE = stoneTier.build("scaffolding_cobble", blockID++,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, 8));

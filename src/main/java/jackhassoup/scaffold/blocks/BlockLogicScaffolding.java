@@ -67,7 +67,7 @@ public class BlockLogicScaffolding extends BlockLogicTransparent {
     public boolean onBlockRightClicked(World world, int x, int y, int z, Player player, Side side, double xPlaced, double yPlaced) {
         ItemStack heldItem = player.getHeldItem();
 
-        if(heldItem == null || player.isSneaking() || heldItem.getItem() != world.getBlock(x,y,z).asItem() ) return false;
+        if(heldItem == null || player.isSneaking() || heldItem.getItem() != world.getBlock(x,y,z).asItem() || heldItem.getMetadata() != world.getBlockMetadata(x, y, z)) return false;
 
         if(side != Side.TOP && side != Side.BOTTOM)
         {

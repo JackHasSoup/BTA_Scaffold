@@ -1,97 +1,89 @@
 #!/usr/bin/env python3
 """
-Palette remap with transparency using index 0, preserving all colours by shifting.
-Also supports optional overlays.
+Index‑for‑index palette swap:
+
+1. For every PNG in ./palette/ …
+   • Create ./remapped/<palette‑stem>/.
+   • For each PNG in ./original/:
+       – Copy its *index map* intact.
+       – Replace its .palette with the palette image’s .palette.
+       – Convert result to RGBA (so downstream software doesn’t balk at 'P' mode).
+       – Composite identically‑named overlay (if present in ./overlay/).
+       – Save as PNG (RGBA).
+
+Assumptions
+-----------
+• Both the original image and the palette image use 8‑bit indexed colour
+  (mode 'P') or can be losslessly converted to it.
+• They share the same palette **ordering** (index 0 means the same concept
+  in both).  If a palette image defines <256 colours it is padded with black.
 """
 
 from pathlib import Path
 from PIL import Image
-import sys
 
-# -------- paths --------------------------------------------------------------
+BASE      = Path(__file__).resolve().parent
+ORIGINAL  = BASE / "original"
+PALETTES  = BASE / "palette"
+OVERLAYS  = BASE / "overlay"
+REMAPPED  = BASE / "remapped"
+REMAPPED.mkdir(exist_ok=True)
 
-ROOT_DIR     = Path(__file__).resolve().parent
-PALETTE_DIR  = ROOT_DIR / "palettes"
-ORIGINAL_DIR = ROOT_DIR / "originals"
-OVERLAY_DIR  = ROOT_DIR / "overlays"
-OUTPUT_ROOT  = ROOT_DIR / "remapped"
+def ensure_mode_p(img: Image.Image) -> Image.Image:
+    """Return image in mode 'P' with 256‑entry palette (pads with zeros)."""
+    if img.mode == "P":
+        # Ensure the palette has exactly 768 bytes (256×RGB)
+        pal = img.getpalette()
+        if pal is None:
+            raise ValueError("Palette image has no palette data")
+        if len(pal) < 768:
+            pal += [0] * (768 - len(pal))
+        img.putpalette(pal[:768])
+        return img
+    # Lossless conversion provided image has ≤256 colours
+    return img.convert("P")
 
-# -------- helpers ------------------------------------------------------------
+def swap_palette(index_img: Image.Image, new_pal_img: Image.Image) -> Image.Image:
+    """Return a *new* 'P' image whose indices come from index_img but whose
+       colour table comes from new_pal_img."""
+    out = index_img.copy()
+    out.putpalette(new_pal_img.getpalette()[:768])
+    return out
 
-def shifted_palette_image(png: Path) -> Image.Image:
-    """Load palette PNG and shift all colours up by 1 index. Index 0 is reserved for transparency."""
-    rgb = Image.open(png).convert("RGB")
-    colours = []
-    for px in rgb.getdata():
-        if px not in colours:
-            colours.append(px)
-        if len(colours) == 255:  # leave room for transparency at index 0
-            break
-
-    # Create shifted palette: index 0 = transparent (0,0,0), others shifted
-    shifted = [0, 0, 0]  # index 0 = transparent
-    shifted.extend([c for rgb in colours for c in rgb])
-
-    # Pad to 768 bytes
-    shifted += [0] * (768 - len(shifted))
-
-    pal = Image.new("P", (1, 1))
-    pal.putpalette(shifted)
-    return pal
-
-
-def quantize_with_transparency(rgba: Image.Image, pal_img: Image.Image) -> Image.Image:
-    """
-    Quantize to a pre-shifted palette that reserves index 0 for transparency.
-    Transparent pixels get index 0, everything else is quantized to index 1+.
-    """
-    rgb = rgba.convert("RGB")
-    quantized = rgb.quantize(palette=pal_img, dither=Image.NONE)
-
-    # Make fully transparent pixels become index 0
-    alpha = rgba.getchannel("A")
-    mask = alpha.point(lambda a: 255 if a == 0 else 0, mode="1")
-    if mask.getbbox():  # only apply if there are transparent pixels
-        quantized.paste(0, None, mask)
-        quantized.info["transparency"] = bytes([0])
-
-    return quantized
-
-# -------- main ---------------------------------------------------------------
+def overlay_if_exists(base_rgba: Image.Image, overlay_path: Path) -> Image.Image:
+    if overlay_path.exists():
+        ov = Image.open(overlay_path).convert("RGBA")
+        return Image.alpha_composite(base_rgba, ov)
+    return base_rgba
 
 def main():
-    for p in (PALETTE_DIR, ORIGINAL_DIR):
-        if not p.is_dir():
-            sys.exit(f"Required directory missing: {p}")
-    OUTPUT_ROOT.mkdir(exist_ok=True)
+    originals = sorted(ORIGINAL.glob("*.png"))
+    if not originals:
+        print("No PNGs in 'original'")
+        return
 
-    for pal_png in sorted(PALETTE_DIR.glob("*.png")):
-        pal_name = pal_png.stem
-        dest_dir = OUTPUT_ROOT / pal_name
-        dest_dir.mkdir(exist_ok=True)
-        print(f"[+] Palette: {pal_name}")
+    # Ensure originals are read once and cached as index maps
+    originals_p = {p: ensure_mode_p(Image.open(p)) for p in originals}
 
-        palette_img = shifted_palette_image(pal_png)
+    for pal_path in sorted(PALETTES.glob("*.png")):
+        palette_name = pal_path.stem
+        dst_dir = REMAPPED / palette_name
+        dst_dir.mkdir(parents=True, exist_ok=True)
 
-        for orig_png in sorted(ORIGINAL_DIR.glob("*.png")):
-            # Load base image
-            base = Image.open(orig_png).convert("RGBA")
+        pal_img = ensure_mode_p(Image.open(pal_path))
+        print(f"→ Palette '{palette_name}'")
 
-            # Apply overlay if it exists
-            overlay_path = OVERLAY_DIR / orig_png.name
-            if overlay_path.is_file():
-                overlay = Image.open(overlay_path).convert("RGBA")
-                base = Image.alpha_composite(base, overlay)
+        for orig_path, idx_img in originals_p.items():
+            out_p = swap_palette(idx_img, pal_img)
 
-            # Remap colours and preserve transparency
-            indexed = quantize_with_transparency(base, palette_img)
+            # Convert to RGBA for saving (keeps any transparency index)
+            out_rgba = out_p.convert("RGBA")
 
-            out_path = dest_dir / orig_png.name
-            indexed.save(out_path, format="PNG")
-            print(f"    saved {out_path.relative_to(ROOT_DIR)}")
+            # Overlay step
+            out_rgba = overlay_if_exists(out_rgba, OVERLAYS / orig_path.name)
 
-    print("\nAll done. Output is in:", OUTPUT_ROOT)
-
+            out_rgba.save(dst_dir / orig_path.name, "PNG")
+            print(f"   {orig_path.name} → {dst_dir.relative_to(BASE)}/")
 
 if __name__ == "__main__":
     main()

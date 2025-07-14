@@ -128,4 +128,19 @@ public class BlockModelColouredScaffolding <T extends BlockLogic> extends BlockM
                 
         }
     }
+
+    @Override
+    public IconCoordinate getBlockTextureFromSideAndMetadata(Side side, int data) {
+        switch (side) {
+            case TOP:
+                return TopTextures[data & 15];
+
+            case BOTTOM:
+                return BottomTextures[data & 15];
+        
+            default:
+                return SideTextures[data & 15];
+        }
+		
+	}
 }

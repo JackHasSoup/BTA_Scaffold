@@ -1,2 +1,43 @@
 tile.scaffold.scaffolding.bamboo.name = Bamboo Scaffolding
 tile.scaffold.scaffolding.bamboo.desc = Flimsy scaffolding made of sugarcane
+
+tile.scaffold.scaffolding.paper.name = Paper Scaffolding
+tile.scaffold.scaffolding.paper.desc = Fragile scaffolding made from paper
+
+tile.scaffold.scaffolding.wood.name = Wooden Scaffolding
+tile.scaffold.scaffolding.wood.desc = Rickety scaffolding made from oak
+
+tile.scaffold.scaffolding.wood.painted.name = Painted Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.desc = Rickety scaffolding painted
+tile.scaffold.scaffolding.wood.painted.white.name = White Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.white.desc = Rickety scaffolding painted white
+tile.scaffold.scaffolding.wood.painted.orange.name = Orange Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.orange.desc = Rickety scaffolding painted orange
+tile.scaffold.scaffolding.wood.painted.magenta.name = Magenta Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.magenta.desc = Rickety scaffolding painted magenta
+tile.scaffold.scaffolding.wood.painted.lightblue.name = Light Blue Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.lightblue.desc = Rickety scaffolding painted light blue
+tile.scaffold.scaffolding.wood.painted.yellow.name = Yellow Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.yellow.desc = Rickety scaffolding painted yellow
+tile.scaffold.scaffolding.wood.painted.lime.name = Lime Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.lime.desc = Rickety scaffolding painted lime
+tile.scaffold.scaffolding.wood.painted.pink.name = Pink Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.pink.desc = Rickety scaffolding painted pink
+tile.scaffold.scaffolding.wood.painted.gray.name = Gray Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.gray.desc = Rickety scaffolding painted gray
+tile.scaffold.scaffolding.wood.painted.silver.name = Light Gray Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.silver.desc = Rickety scaffolding painted light gray
+tile.scaffold.scaffolding.wood.painted.cyan.name = Cyan Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.cyan.desc = Rickety scaffolding painted cyan
+tile.scaffold.scaffolding.wood.painted.purple.name = Purple Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.purple.desc = Rickety scaffolding painted purple
+tile.scaffold.scaffolding.wood.painted.blue.name = Blue Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.blue.desc = Rickety scaffolding painted blue
+tile.scaffold.scaffolding.wood.painted.brown.name = Brown Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.brown.desc = Rickety scaffolding painted brown
+tile.scaffold.scaffolding.wood.painted.green.name = Green Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.green.desc = Rickety scaffolding painted green
+tile.scaffold.scaffolding.wood.painted.red.name = Red Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.red.desc = Rickety scaffolding painted red
+tile.scaffold.scaffolding.wood.painted.black.name = Black Wood Scaffolding
+tile.scaffold.scaffolding.wood.painted.black.desc = Rickety scaffolding painted black
