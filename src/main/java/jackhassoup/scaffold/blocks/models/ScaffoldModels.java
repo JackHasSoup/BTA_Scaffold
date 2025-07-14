@@ -44,6 +44,20 @@ public class ScaffoldModels implements ModelEntrypoint {
                     .setTex(0, "scaffold:block/scaffolding/wood/oak/side", Side.sides)
                     .setTex(0, "scaffold:block/scaffolding/wood/oak/top", Side.TOP)
                     .setTex(0, "scaffold:block/scaffolding/wood/oak/bottom", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.SCAFFOLD_COBBLE,
+            () -> new BlockModelScaffolding<>(ScaffoldBlocks.SCAFFOLD_COBBLE, true, "cobble")
+                    .setTex(0, "scaffold:block/scaffolding/cobble/side", Side.sides)
+                    .setTex(0, "scaffold:block/scaffolding/cobble/top", Side.TOP)
+                    .setTex(0, "scaffold:block/scaffolding/cobble/top", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.SCAFFOLD_SLATE,
+            () -> new BlockModelScaffolding<>(ScaffoldBlocks.SCAFFOLD_SLATE, true, "slate")
+                    .setTex(0, "scaffold:block/scaffolding/slate/side", Side.sides)
+                    .setTex(0, "scaffold:block/scaffolding/slate/top", Side.TOP)
+                    .setTex(0, "scaffold:block/scaffolding/slate/bottom", Side.BOTTOM));
     }
 
     @Override

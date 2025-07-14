@@ -41,3 +41,10 @@ tile.scaffold.scaffolding.wood.painted.red.name = Red Wood Scaffolding
 tile.scaffold.scaffolding.wood.painted.red.desc = Rickety scaffolding painted red
 tile.scaffold.scaffolding.wood.painted.black.name = Black Wood Scaffolding
 tile.scaffold.scaffolding.wood.painted.black.desc = Rickety scaffolding painted black
+
+tile.scaffold.scaffolding.cobble.name = Cobblstone Scaffolding
+tile.scaffold.scaffolding.cobble.desc = Fairly sturdy scaffolding
+
+tile.scaffold.scaffolding.slate.name = Slate Scaffolding
+tile.scaffold.scaffolding.slate.desc = Very reliable scaffolding made from slate
+
