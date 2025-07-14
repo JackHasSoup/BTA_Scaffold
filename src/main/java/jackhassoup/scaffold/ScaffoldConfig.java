@@ -10,6 +10,8 @@ public class ScaffoldConfig {
     public static int blockIDs = 7000;
     public static int itemIDs = 24000;
 
+    public static int allPlatformSpan = 4;
+
     public static int bambooScaffoldSpan = 5;
     public static int paperScaffoldSpan = 4;
     public static int woodScaffoldSpan = 6;
@@ -31,6 +33,7 @@ public class ScaffoldConfig {
         properties.addEntry("Scaffold lengths.wood", woodScaffoldSpan);
         properties.addEntry("Scaffold lengths.cobble", cobbleScaffoldSpan);
         properties.addEntry("Scaffold lengths.slate", slateScaffoldSpan);
+        properties.addEntry("Scaffold lengths.all_platforms", allPlatformSpan);
 
         cfg = new TomlConfigHandler(ScaffoldMod.MOD_ID, properties);
     }

@@ -17,6 +17,8 @@ public class ScaffoldModels implements ModelEntrypoint {
     @Override
     public void initBlockModels(BlockModelDispatcher dispatcher) {
 
+        //-=-=-=-=-=-=-=- SCAFFOLDING -=-=-=-=-=-=-=-
+
         ModelHelper.setBlockModel(
                 ScaffoldBlocks.SCAFFOLD_BAMBOO,
                 () -> new BlockModelScaffolding<>(ScaffoldBlocks.SCAFFOLD_BAMBOO, true, "bamboo")
@@ -58,6 +60,14 @@ public class ScaffoldModels implements ModelEntrypoint {
                     .setTex(0, "scaffold:block/scaffolding/slate/side", Side.sides)
                     .setTex(0, "scaffold:block/scaffolding/slate/top", Side.TOP)
                     .setTex(0, "scaffold:block/scaffolding/slate/bottom", Side.BOTTOM));
+
+        //-=-=-=-=-=-=-=- PLATFORMS -=-=-=-=-=-=-=-
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_CLOTH,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_CLOTH, true, "cloth")
+                    .setTex(0, "scaffold:block/platform/cloth/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/cloth/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
     }
 
     @Override

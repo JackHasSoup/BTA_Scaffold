@@ -22,7 +22,9 @@ public class ScaffoldBlocks {
     public static Block<?> SCAFFOLD_SLATE;
     public static Block<?> SCAFFOLD_IRON;
     public static Block<?> SCAFFOLD_STEEL;
-    //public static Block<?> SCAFFOLD_cloth; //dyeable???
+
+    //PLATFORMS
+    public  static Block<?> PLATFORM_CLOTH;
 
     public static void initBlocks() {
         BlockBuilder woodTier = new BlockBuilder(MOD_ID)
@@ -48,6 +50,8 @@ public class ScaffoldBlocks {
                 .setTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.CAN_HANG_OFF, BlockTags.INSTANT_PICKUP)
                 .setBlockSound(BlockSounds.METAL);
 
+
+        //-=-=-=-=-=-=-=- SCAFFOLDING -=-=-=-=-=-=-=-
         SCAFFOLD_BAMBOO = woodTier.build("scaffolding_bamboo", blockID++,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.bambooScaffoldSpan));
 
@@ -67,5 +71,10 @@ public class ScaffoldBlocks {
                 
         SCAFFOLD_SLATE = stoneTier.build("scaffolding_slate", blockID++,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.slateScaffoldSpan));
+
+        //-=-=-=-=-=-=-=- PLATFORMS -=-=-=-=-=-=-=-
+        PLATFORM_CLOTH = woodTier.build("platform_cloth", blockID++,
+                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false));
+        
     }
 }

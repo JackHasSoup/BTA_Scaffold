@@ -36,7 +36,7 @@ public class BlockModelScaffolding<T extends BlockLogic> extends BlockModelBackF
             {
                 //check the side trying to be rendered, don't render support/hang/legs between blocks
                 Block<?> b = blockAccess.getBlock(x+side.getOffsetX(), y, z+side.getOffsetZ());
-                if(b != null && b.blocksLight()) return empty; //only hide face on a solid block
+                if(b != null && b.getMaterial() != Material.air) return empty; //only hide face on a solid block
 
                 //no air below block? no problem render the legs!
                 if (blockAccess.getBlockMaterial(x, y - 1, z) != Material.air) {

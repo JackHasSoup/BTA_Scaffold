@@ -28,13 +28,14 @@ public class BlockLogicRightClickExpandable extends BlockLogicTransparent{
     public boolean onBlockRightClicked(World world, int x, int y, int z, Player player, Side side, double xPlaced, double yPlaced) {
         ItemStack heldItem = player.getHeldItem();
         
-        if(player.isSneaking() || heldItem == null)
+        if(player.isSneaking() && heldItem == null)
         {
             this.harvestBlock(world, player, x, y, z, z, null);
             world.setBlockWithNotify(x, y, z, 0);
             return false;
         }
-        if(heldItem.getItem() != world.getBlock(x,y,z).asItem() || heldItem.getMetadata() != world.getBlockMetadata(x, y, z)) return false;
+
+        if(heldItem == null || heldItem.getItem() != world.getBlock(x,y,z).asItem() || heldItem.getMetadata() != world.getBlockMetadata(x, y, z)) return false;
 
         if(expandVertical && side != Side.TOP && side != Side.BOTTOM)
         {
@@ -129,8 +130,19 @@ public class BlockLogicRightClickExpandable extends BlockLogicTransparent{
             int dist = node[3];
             if (dist > maxSpan) continue;
             //check if directly supported by non-air block below
-            if (world.getBlockMaterial(cx, cy - 1, cz) != Material.air) {
+            if (!supportHorizontal && world.getBlockMaterial(cx, cy - 1, cz).isSolid()) {
                 return true;
+            }else if(supportHorizontal){
+                //check surrounding blocks
+                for(int X = -1; X < 1; X++)
+                {
+                    for(int Z = -1; Z < 1; Z++)
+                    {
+                        if(X==0&&Z==0) continue;//if both 0, that is this block. it can't support itself
+
+                        if(world.getBlockMaterial(X, cy, Z).isSolid() && world.getBlockId(X, cy, Z) != id()) return true;
+                    }
+                }
             }
             //add neighbors (horizontal and down)
             int[][] offsets = { {1,0,0}, {-1,0,0}, {0,0,1}, {0,0,-1}, {0,-1,0} };
