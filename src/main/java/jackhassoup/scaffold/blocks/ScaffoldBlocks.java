@@ -52,35 +52,35 @@ public class ScaffoldBlocks {
 
 
         //-=-=-=-=-=-=-=- SCAFFOLDING -=-=-=-=-=-=-=-
-        SCAFFOLD_BAMBOO = woodTier.build("scaffolding_bamboo", blockID++,
+        SCAFFOLD_BAMBOO = woodTier.build("scaffolding_bamboo", blockID+0,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.bambooScaffoldSpan));
 
-        SCAFFOLD_PAPER = woodTier.build("scaffolding_paper", blockID++,
+        SCAFFOLD_PAPER = woodTier.build("scaffolding_paper", blockID+1,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.paperScaffoldSpan));
 
-        SCAFFOLD_WOOD = woodTier.build("scaffolding_wood", blockID++,
+        SCAFFOLD_WOOD = woodTier.build("scaffolding_wood", blockID+2,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.woodScaffoldSpan));
 
-        SCAFFOLD_WOOD_PAINTED = woodTier.build("scaffolding_wood_painted", blockID++,
+        SCAFFOLD_WOOD_PAINTED = woodTier.build("scaffolding_wood_painted", blockID+3,
                 (b) -> new BlockLogicColouredScaffolding(b, Material.decoration, ScaffoldConfig.woodScaffoldSpan))
                 .setBlockItem((b) -> {return new ItemBlockPainted<>(b,false);});
         
 
-        SCAFFOLD_COBBLE = stoneTier.build("scaffolding_cobble", blockID++,
+        SCAFFOLD_COBBLE = stoneTier.build("scaffolding_cobble", blockID+4,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.cobbleScaffoldSpan));
                 
-        SCAFFOLD_SLATE = stoneTier.build("scaffolding_slate", blockID++,
+        SCAFFOLD_SLATE = stoneTier.build("scaffolding_slate", blockID+5,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.slateScaffoldSpan));
 
 
-         SCAFFOLD_IRON = metalTier.build("scaffolding_iron", blockID++,
+         SCAFFOLD_IRON = metalTier.build("scaffolding_iron", blockID+6,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.ironScaffoldSpan));
 
-        SCAFFOLD_STEEL = metalTier.build("scaffolding_steel", blockID++,
+        SCAFFOLD_STEEL = metalTier.build("scaffolding_steel", blockID+7,
                 (b) -> new BlockLogicScaffolding(b, Material.decoration, ScaffoldConfig.steelScaffoldSpan));
 
         //-=-=-=-=-=-=-=- PLATFORMS -=-=-=-=-=-=-=-
-        PLATFORM_CLOTH = woodTier.build("platform_cloth", blockID++,
+        PLATFORM_CLOTH = woodTier.build("platform_cloth", blockID+8,
                 (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false));
         
     }
