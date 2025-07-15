@@ -69,7 +69,7 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
         return true;
     }
     // --- Reversed face helpers ---
-    // These methods add the same quad as the normal face, but with the vertex order reversed and no AO/lighting.
+    // These methods add the same quad as the normal face, but with the vertex order reversed
     private void renderBottomFaceReversed(Tessellator tessellator, AABB bounds, double x, double y, double z, IconCoordinate tex, float r, float g, float b) {
         if (tex == null) return;
         double d3 = tex.getSubIconU(bounds.minX);
