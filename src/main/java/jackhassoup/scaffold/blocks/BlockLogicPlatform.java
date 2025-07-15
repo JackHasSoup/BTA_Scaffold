@@ -8,6 +8,7 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.AABB;
+import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import turniplabs.halplibe.helper.EnvironmentHelper;
@@ -84,8 +85,12 @@ public class BlockLogicPlatform extends BlockLogicRightClickExpandable{
     public boolean collidesWithEntity(Entity entity, World world, int x, int y, int z) {
         if(!EnvironmentHelper.isServerEnvironment()){if(entity instanceof PlayerLocal && ((PlayerLocal)entity).input == null) return false;}
         if(canDrop(entity)) return false;
+        
+        //if entity trying to jump up, boost them
+        boolean entityAbove = entity.y - entity.heightOffset > y;
+        if(!entityAbove ){entity.yd *= 1.065;}
 
-        return entity.y - entity.heightOffset > y;
+        return entityAbove;
     }
 
     protected boolean canDrop(Entity entity)
