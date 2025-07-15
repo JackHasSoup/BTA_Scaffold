@@ -13,9 +13,12 @@ import net.minecraft.core.world.WorldSource;
 
 public class BlockLogicPlatform extends BlockLogicRightClickExpandable{
 
-    public BlockLogicPlatform(Block<?> block, Material material, int maxSpan, boolean expandVertical) {
+    public final boolean canDropThrough;
+
+    public BlockLogicPlatform(Block<?> block, Material material, int maxSpan, boolean expandVertical, boolean canDropThrough) {
         super(block, material, maxSpan, expandVertical, true);
         this.setBlockBounds(0.0,0.0,0.0,1.0,0.375,1.0);
+        this.canDropThrough = canDropThrough;
     }
     
     @Override
@@ -79,9 +82,14 @@ public class BlockLogicPlatform extends BlockLogicRightClickExpandable{
     @Override
     public boolean collidesWithEntity(Entity entity, World world, int x, int y, int z) {
         if(entity instanceof PlayerLocal && ((PlayerLocal)entity).input == null) return false;
-        if(entity.isSneaking() && world.getBlockMaterial(x, y - 1, z) == Material.air) return true;
+        if(canDrop(entity)) return false;
 
-        return !entity.isSneaking() && entity.y - entity.heightOffset > y;
+        return entity.y - entity.heightOffset > y;
+    }
+
+    protected boolean canDrop(Entity entity)
+    {
+        return entity.isSneaking() && canDropThrough;
     }
 
 }

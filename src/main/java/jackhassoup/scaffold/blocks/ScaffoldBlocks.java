@@ -81,7 +81,7 @@ public class ScaffoldBlocks {
 
         //-=-=-=-=-=-=-=- PLATFORMS -=-=-=-=-=-=-=-
         PLATFORM_CLOTH = woodTier.build("platform_cloth", blockID+8,
-                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false));
+                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, true));
         
     }
 }
