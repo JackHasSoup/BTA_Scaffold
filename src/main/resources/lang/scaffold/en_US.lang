@@ -54,5 +54,28 @@ tile.scaffold.scaffolding.iron.desc = Sturdy scaffolding made from iron
 tile.scaffold.scaffolding.steel.name = Steel Scaffolding
 tile.scaffold.scaffolding.steel.desc = Very sturdy scaffolding made from steel
 
-tile.scaffold.platform.cloth.name = Cloth platform
-tile.scaffold.platform.cloth.desc = A platform that allows vertical movement one way, covered with cloth
+tile.scaffold.platform.cloth.name = Cloth Platform
+tile.scaffold.platform.cloth.desc = A platform that allows vertical movement both ways, covered with cloth
+
+tile.scaffold.platform.mesh.name = Mesh Platform
+tile.scaffold.platform.mesh.desc = A platform that allows vertical movement both ways, items can pass through
+
+tile.scaffold.platform.mesh.gold.name = Gold Mesh Platform
+tile.scaffold.platform.mesh.gold.desc = A platform that allows vertical movement both ways, but only when holding an item matching the filter
+
+tile.scaffold.platform.brick.basalt.name = Basalt Brick Platform
+tile.scaffold.platform.brick.basalt.desc = A platform that allows vertical movement one way, made of basalt brick
+tile.scaffold.platform.brick.clay.name = Clay Brick Platform
+tile.scaffold.platform.brick.clay.desc = A platform that allows vertical movement one way, made of clay brick
+tile.scaffold.platform.brick.granite.name = Granite Brick Platform
+tile.scaffold.platform.brick.granite.desc = A platform that allows vertical movement one way, made of granite brick
+tile.scaffold.platform.brick.limestone.name = Limestone Brick Platform
+tile.scaffold.platform.brick.limestone.desc = A platform that allows vertical movement one way, made of limestone brick
+tile.scaffold.platform.brick.marble.name = Marble Brick Platform
+tile.scaffold.platform.brick.marble.desc = A platform that allows vertical movement one way, made of marble brick
+tile.scaffold.platform.brick.polished_stone.name = Polished Stone Brick Platform
+tile.scaffold.platform.brick.polished_stone.desc = A platform that allows vertical movement one way, made of polished stone brick
+tile.scaffold.platform.brick.slate.name = Slate Brick Platform
+tile.scaffold.platform.brick.slate.desc = A platform that allows vertical movement one way, made of slate brick
+tile.scaffold.platform.brick.stone.name = Stone Brick Platform
+tile.scaffold.platform.brick.stone.desc = A platform that allows vertical movement one way, made of stone brick
