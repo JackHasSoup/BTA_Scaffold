@@ -4,6 +4,7 @@ import net.minecraft.client.entity.player.PlayerLocal;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
@@ -32,6 +33,11 @@ public class BlockLogicScaffolding extends BlockLogicRightClickExpandable {
 
     @Override
     public boolean blocksLight() {
+        return false;
+    }
+
+    @Override
+    public boolean getIsBlockSolid(WorldSource blockAccess, int x, int y, int z, Side side) {
         return false;
     }
 
