@@ -82,6 +82,76 @@ public class ScaffoldModels implements ModelEntrypoint {
                     .setTex(0, "scaffold:block/platform/cloth/side", Side.sides)
                     .setTex(0, "scaffold:block/platform/cloth/top", Side.TOP)
                     .setTex(0, "scaffold:block/empty", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_MESH,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_MESH, true, "mesh")
+                    .setTex(0, "scaffold:block/platform/mesh/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/mesh/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_MESH_GOLD,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_MESH_GOLD, true, "mesh_gold")
+                    .setTex(0, "scaffold:block/platform/mesh_gold/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/mesh_gold/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_BRICK_BASALT,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_BRICK_BASALT, true, "brick/basalt")
+                    .setTex(0, "scaffold:block/platform/brick/basalt/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/brick/basalt/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_BRICK_CLAY,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_BRICK_CLAY, true, "brick/clay")
+                    .setTex(0, "scaffold:block/platform/brick/clay/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/brick/clay/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_BRICK_GRANITE,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_BRICK_GRANITE, true, "brick/granite")
+                    .setTex(0, "scaffold:block/platform/brick/granite/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/brick/granite/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_BRICK_LIMESTONE,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_BRICK_LIMESTONE, true, "brick/limestone")
+                    .setTex(0, "scaffold:block/platform/brick/limestone/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/brick/limestone/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_BRICK_MARBLE,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_BRICK_MARBLE, true, "brick/marble")
+                    .setTex(0, "scaffold:block/platform/brick/marble/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/brick/marble/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_BRICK_POLISHED_STONE,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_BRICK_POLISHED_STONE, true, "brick/polished_stone")
+                    .setTex(0, "scaffold:block/platform/brick/polished_stone/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/brick/polished_stone/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_BRICK_SLATE,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_BRICK_SLATE, true, "brick/slate")
+                    .setTex(0, "scaffold:block/platform/brick/slate/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/brick/slate/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
+
+        ModelHelper.setBlockModel(
+            ScaffoldBlocks.PLATFORM_BRICK_STONE,
+            () -> new BlockModelPlatform<>(ScaffoldBlocks.PLATFORM_BRICK_STONE, true, "brick/stone")
+                    .setTex(0, "scaffold:block/platform/brick/stone/side", Side.sides)
+                    .setTex(0, "scaffold:block/platform/brick/stone/top", Side.TOP)
+                    .setTex(0, "scaffold:block/empty", Side.BOTTOM));
     }
 
     @Override

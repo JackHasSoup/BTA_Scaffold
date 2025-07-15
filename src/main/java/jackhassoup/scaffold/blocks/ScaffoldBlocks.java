@@ -25,6 +25,16 @@ public class ScaffoldBlocks {
 
     //PLATFORMS
     public  static Block<?> PLATFORM_CLOTH;
+    public  static Block<?> PLATFORM_MESH;
+    public  static Block<?> PLATFORM_MESH_GOLD;
+    public  static Block<?> PLATFORM_BRICK_BASALT;
+    public  static Block<?> PLATFORM_BRICK_CLAY;
+    public  static Block<?> PLATFORM_BRICK_GRANITE;
+    public  static Block<?> PLATFORM_BRICK_LIMESTONE;
+    public  static Block<?> PLATFORM_BRICK_MARBLE;
+    public  static Block<?> PLATFORM_BRICK_POLISHED_STONE;
+    public  static Block<?> PLATFORM_BRICK_SLATE;
+    public  static Block<?> PLATFORM_BRICK_STONE;
 
     public static void initBlocks() {
         BlockBuilder woodTier = new BlockBuilder(MOD_ID)
@@ -36,20 +46,19 @@ public class ScaffoldBlocks {
                 .setBlockSound(BlockSounds.WOOD)
                 .setVisualUpdateOnMetadata();
 
-            BlockBuilder stoneTier = new BlockBuilder(MOD_ID)
+        BlockBuilder stoneTier = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.STONE)
                 .setHardness(1.2F)
                 .setResistance(1.2F)
                 .setTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.MINEABLE_BY_SWORD, BlockTags.CAN_HANG_OFF, BlockTags.INSTANT_PICKUP)
                 .setBlockSound(BlockSounds.STONE);
 
-                BlockBuilder metalTier = new BlockBuilder(MOD_ID)
+        BlockBuilder metalTier = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(1.2F)
                 .setResistance(1.5F)
                 .setTags(BlockTags.MINEABLE_BY_PICKAXE, BlockTags.CAN_HANG_OFF, BlockTags.INSTANT_PICKUP)
                 .setBlockSound(BlockSounds.METAL);
-
 
         //-=-=-=-=-=-=-=- SCAFFOLDING -=-=-=-=-=-=-=-
         SCAFFOLD_BAMBOO = woodTier.build("scaffolding_bamboo", blockID+0,
@@ -82,6 +91,35 @@ public class ScaffoldBlocks {
         //-=-=-=-=-=-=-=- PLATFORMS -=-=-=-=-=-=-=-
         PLATFORM_CLOTH = woodTier.build("platform_cloth", blockID+8,
                 (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, true));
+
+        PLATFORM_MESH = metalTier.build("platform_mesh", blockID+9, 
+                (b) -> new BlockLogicPlatformMesh(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, true));
         
+        PLATFORM_MESH_GOLD = metalTier.build("platform_mesh_gold", blockID+10, 
+                (b) -> new BlockLogicPlatformMeshGold(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, true));
+
+        PLATFORM_BRICK_BASALT = stoneTier.build("platform_brick_basalt", blockID+11, 
+                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, false));
+
+        PLATFORM_BRICK_CLAY = stoneTier.build("platform_brick_clay", blockID+12, 
+                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, false));
+
+        PLATFORM_BRICK_GRANITE = stoneTier.build("platform_brick_granite", blockID+13, 
+                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, false));
+
+        PLATFORM_BRICK_LIMESTONE = stoneTier.build("platform_brick_limestone", blockID+14, 
+                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, false));
+
+        PLATFORM_BRICK_MARBLE = stoneTier.build("platform_brick_marble", blockID+15, 
+                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, false));
+
+        PLATFORM_BRICK_POLISHED_STONE = stoneTier.build("platform_brick_polished_stone", blockID+16, 
+                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, false));
+
+        PLATFORM_BRICK_SLATE = stoneTier.build("platform_brick_slate", blockID+17, 
+                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, false));
+
+        PLATFORM_BRICK_STONE = stoneTier.build("platform_brick_stone", blockID+18, 
+                (b) -> new BlockLogicPlatform(b, Material.decoration, ScaffoldConfig.allPlatformSpan, false, false));
     }
 }
