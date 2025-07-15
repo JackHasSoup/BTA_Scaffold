@@ -29,10 +29,12 @@ public class BlockModelPlatform<T extends BlockLogic> extends BlockModelBackFace
         AABB bounds = this.block.getBlockBoundsFromState(renderBlocks.blockAccess, x, y, z);
         this.setRenderSide(Side.BOTTOM, false);
         this.renderStandardBlockWithBackfaces(tessellator, this, bounds, x,y,z, 255, 255, 255);
+        this.renderStandardBlock(tessellator, bounds, x, y, z);
         renderBlocks.renderBitMask = 63;
         this.setRenderSide(Side.BOTTOM, true);
         bounds.minY += 0.1875;
         this.renderStandardBlockWithBackfaces(tessellator, this, bounds, x,y,z, 255, 255, 255);
+        this.renderStandardBlock(tessellator, bounds, x, y, z);
         renderBlocks.renderBitMask = 0;
         return true;
     }
@@ -50,13 +52,25 @@ public class BlockModelPlatform<T extends BlockLogic> extends BlockModelBackFace
                 //check the side trying to be rendered, don't render support/hang/legs between blocks
                 Block<?> b = blockAccess.getBlock(x+side.getOffsetX(), y, z+side.getOffsetZ());
                 //if the side is covered by something other than air/null AND if that cover is this block then are they on the same level
-                if(b != null && b.getMaterial() != Material.air){
-                    if (b.id() == block.id() && blockAccess.getBlockMetadata(x+side.getOffsetX(), y, z+side.getOffsetZ()) == blockAccess.getBlockMetadata(x, y, z)) return empty; //only hide face on a solid block
+                if(isSolidOrThis(b)){
+                    if (b.id() == this.block.id() && blockAccess.getBlockMetadata(x+side.getOffsetX(), y, z+side.getOffsetZ()) == blockAccess.getBlockMetadata(x, y, z)) return empty;
                 } 
 
                 if(blockAccess.getBlockMetadata(x, y, z) == 1){return sideBottom;}
                 return sideTop;
             }
         }
+    }
+
+    protected boolean isActuallySolid(Block<?> block)
+    {
+        if(block==null) return false;
+        return block.getMaterial().isSolid()  && block.isCubeShaped() && block.isSolidRender();
+    }
+
+    protected boolean isSolidOrThis(Block<?> b)
+    {
+        if(b ==null) return false;
+        return isActuallySolid(b) || b.id() == this.block.id();
     }
 }
