@@ -34,8 +34,15 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
 
             //somethingRendered |= renderBlocks.renderSide(tessellator, blockModel, bounds, x, y, z, r, g, b, side, meta);
             //inset backface bounds by tiny amount to prevent Z-fighting with adjacent blocks
-            double inv99 = 1.0101010101;
-            AABB insetBounds = AABB.getTemporaryBB(bounds.minX*inv99, bounds.minY*inv99, bounds.minZ*inv99, bounds.maxX*0.99, bounds.maxY*0.99, bounds.maxZ*0.99);
+            double inv99 = -1.0101010101;
+            AABB insetBounds = AABB.getTemporaryBB(
+                bounds.minX*(side.getOffsetX() != 0 ? inv99 * side.getOffsetX() : 1.0),
+                bounds.minY*(side.getOffsetY() != 0 ? inv99 * side.getOffsetY() : 1.0), 
+                bounds.minZ*(side.getOffsetZ() != 0 ? inv99 * side.getOffsetZ() : 1.0), 
+                bounds.maxX*(side.getOffsetX() != 0 ? 0.99 * side.getOffsetX() : 1.0), 
+                bounds.maxY*(side.getOffsetY() != 0 ? 0.99 * side.getOffsetY() : 1.0), 
+                bounds.maxZ*(side.getOffsetZ() != 0 ? 0.99 * side.getOffsetZ() : 1.0)
+                );
             
             somethingRendered |= this.renderBackface(tessellator, blockModel, insetBounds, x, y, z, r, g, b, side, meta, side.getOffsetX(), side.getOffsetY(), side.getOffsetZ());
         }
