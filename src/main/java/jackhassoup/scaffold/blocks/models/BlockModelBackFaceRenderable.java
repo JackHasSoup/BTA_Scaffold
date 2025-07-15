@@ -33,7 +33,11 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
         for (Side side : Side.sides) {
 
             //somethingRendered |= renderBlocks.renderSide(tessellator, blockModel, bounds, x, y, z, r, g, b, side, meta);
-            somethingRendered |= this.renderBackface(tessellator, blockModel, bounds, x, y, z, r, g, b, side, meta, side.getOffsetX(), side.getOffsetY(), side.getOffsetZ());
+            //inset backface bounds by tiny amount to prevent Z-fighting with adjacent blocks
+            double inv99 = 1.0101010101;
+            AABB insetBounds = AABB.getTemporaryBB(bounds.minX*inv99, bounds.minY*inv99, bounds.minZ*inv99, bounds.maxX*0.99, bounds.maxY*0.99, bounds.maxZ*0.99);
+            
+            somethingRendered |= this.renderBackface(tessellator, blockModel, insetBounds, x, y, z, r, g, b, side, meta, side.getOffsetX(), side.getOffsetY(), side.getOffsetZ());
         }
         renderBlocks.enableAO = false;
         return somethingRendered;
@@ -47,7 +51,7 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
         {
             switch (side) {
             case TOP: renderBlocks.setupLighting(block, x,y,z,r,g,b,0,meta,dirX,dirY,dirZ, (float)bounds.minY, 0, 0, 1, (float)bounds.maxZ, (float)bounds.minZ, -1, 0, 0, 1.0F - (float)bounds.minX, 1.0F - (float)bounds.maxX); renderTopFaceReversed(tessellator, bounds, x, y, z, tex, r, g, b); break;
-            case BOTTOM: renderBlocks.setupLighting(block, x,y,z,r,g,b,1,meta,dirX,dirY,dirZ, 1.0F - (float)bounds.maxY, 0, 0, 1, (float)bounds.maxZ, (float)bounds.minZ, 1, 0, 0, (float)bounds.maxX, (float)bounds.minX); renderBottomFaceReversed(tessellator, bounds, x, y, z, tex, r, g, b); break;
+            //case BOTTOM: renderBlocks.setupLighting(block, x,y,z,r,g,b,1,meta,dirX,dirY,dirZ, 1.0F - (float)bounds.maxY, 0, 0, 1, (float)bounds.maxZ, (float)bounds.minZ, 1, 0, 0, (float)bounds.maxX, (float)bounds.minX); renderBottomFaceReversed(tessellator, bounds, x, y, z, tex, r, g, b); break;
             case NORTH: renderBlocks.setupLighting(block, x,y,z,r,g,b,2,meta,dirX,dirY,dirZ, (float)bounds.minZ, -1, 0, 0, 1.0F - (float)bounds.minX, 1.0F - (float)bounds.maxX, 0, 1, 0, (float)bounds.maxY, (float)bounds.minY); renderNorthFaceReversed(tessellator, bounds, x, y, z, tex, r, g, b); break;
             case SOUTH: renderBlocks.setupLighting(block, x,y,z,r,g,b,3,meta,dirX,dirY,dirZ,  1.0F - (float)bounds.maxZ, 0, 1, 0, (float)bounds.maxY, (float)bounds.minY, -1, 0, 0, 1.0F - (float)bounds.minX, 1.0F - (float)bounds.maxX); renderSouthFaceReversed(tessellator, bounds, x, y, z, tex, r, g, b); break;
             case WEST: renderBlocks.setupLighting(block, x,y,z,r,g,b,4,meta,dirX,dirY,dirZ, (float)bounds.minX, 0, 0, 1, (float)bounds.maxZ, (float)bounds.minZ, 0, 1, 0, (float)bounds.maxY, (float)bounds.minY); renderWestFaceReversed(tessellator, bounds, x, y, z, tex, r, g, b); break;

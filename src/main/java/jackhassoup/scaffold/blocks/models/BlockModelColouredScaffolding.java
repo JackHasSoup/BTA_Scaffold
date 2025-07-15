@@ -107,17 +107,19 @@ public class BlockModelColouredScaffolding <T extends BlockLogic> extends BlockM
                 return TopTextures[data&15];
             
             case BOTTOM:
-                if (blockAccess.getBlockMaterial(x, y - 1, z) != Material.air) return BottomTextures[data&15];
+                if (isSolidOrThis(blockAccess.getBlock(x, y - 1, z))) return BottomTextures[data&15];
                 return empty;
         
             default:
             {
                 //check the side trying to be rendered, don't render support/hang/legs between blocks
                 Block<?> b = blockAccess.getBlock(x+side.getOffsetX(), y, z+side.getOffsetZ());
-                if(b != null && b.getMaterial() != Material.air) return empty;
+                if(isSolidOrThis(b)) return empty;
 
                 //no air below block? no problem render the legs!
-                if (blockAccess.getBlockMaterial(x, y - 1, z) != Material.air) {
+                b = blockAccess.getBlock(x, y - 1, z);
+                
+                if (isSolidOrThis(b)) {
                  return SideTextures[data&15];
                 }
 
@@ -127,6 +129,18 @@ public class BlockModelColouredScaffolding <T extends BlockLogic> extends BlockM
             }
                 
         }
+    }
+
+    protected boolean isActuallySolid(Block<?> block)
+    {
+        if(block==null) return false;
+        return block.getMaterial().isSolid()  && block.isCubeShaped() && block.isSolidRender();
+    }
+
+    protected boolean isSolidOrThis(Block<?> b)
+    {
+        if(b ==null) return false;
+        return isActuallySolid(b) || b.id() == this.block.id();
     }
 
     @Override

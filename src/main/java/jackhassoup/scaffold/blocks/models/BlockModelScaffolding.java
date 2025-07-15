@@ -28,19 +28,20 @@ public class BlockModelScaffolding<T extends BlockLogic> extends BlockModelBackF
                 return super.getBlockTexture(blockAccess, x, y, z, side);
             
             case BOTTOM:
-                if (blockAccess.getBlockMaterial(x, y - 1, z).isSolid()) return super.getBlockTexture(blockAccess, x, y, z, side);
+                if (isSolidOrThis(blockAccess.getBlock(x, y - 1, z))) return super.getBlockTexture(blockAccess, x, y, z, side);
                 return empty;
         
             default:
             {
                 //check the side trying to be rendered, don't render support/hang/legs between blocks
                 Block<?> b = blockAccess.getBlock(x+side.getOffsetX(), y, z+side.getOffsetZ());
-                if(b != null && !b.getMaterial().isSolid()) return empty; //only hide face on a solid block
+                if(isSolidOrThis(b)) return empty; //only hide face on a solid block
 
                 //no air below block? no problem render the legs!
                 b = blockAccess.getBlock(x, y - 1, z);
-                if (b != null && (b.getMaterial().isSolid() || b.id() == this.block.id())) {
-                 return sideReg;
+
+                if (isSolidOrThis(b)) {
+                    return sideReg;
                 }
 
                 //this block is hanging
@@ -49,6 +50,18 @@ public class BlockModelScaffolding<T extends BlockLogic> extends BlockModelBackF
             }
                 
         }
+    }
+
+    protected boolean isActuallySolid(Block<?> block)
+    {
+        if(block==null) return false;
+        return block.getMaterial().isSolid()  && block.isCubeShaped() && block.isSolidRender();
+    }
+
+    protected boolean isSolidOrThis(Block<?> b)
+    {
+        if(b ==null) return false;
+        return isActuallySolid(b) || b.id() == this.block.id();
     }
 
     
