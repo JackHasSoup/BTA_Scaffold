@@ -100,16 +100,36 @@ public class BlockLogicRightClickExpandable extends BlockLogicTransparent{
 
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, int blockId) {
+
+         Player p = world.getClosestPlayer(x, y, z, maxSpan * 3);
+            
         if(!hasSupport(world, x, y, z))
         {
-            Player p = world.getClosestPlayer(x, y, z, maxSpan * 3);
-            if(p == null){
+           if(p == null){
                 this.dropBlockWithCause(world, EnumDropCause.WORLD, x, y, z, blockId, null, null);
             }else{
                 this.harvestBlock(world, world.getClosestPlayer(x, y, z, maxSpan * 3), x, y, z, blockId, null);
             }
             
             world.setBlockWithNotify(x, y, z, 0);
+        }else{
+            //check each ordinal neighbour and notify them if they are unsupported
+            int[][] offsets = { {1,0}, {-1,0}, {0,1}, {0,-1} };
+                for (int[] off : offsets) {
+                    int nx = x + off[0];
+                    int nz = z + off[1];
+                    int neighbourId = world.getBlockId(nx, y, nz);
+                    if (neighbourId == this.id() && !hasSupport(world, nx, y, nz)) {
+
+                        if(p == null){
+                            this.dropBlockWithCause(world, EnumDropCause.WORLD, nx, y, nz, blockId, null, null);
+                        }else{
+                            this.harvestBlock(world, world.getClosestPlayer(nx, y, nz, maxSpan * 3), nx, y, nz, blockId, null);
+                        }
+
+                        world.setBlockWithNotify(nx, y, nz, 0);
+                    }
+                }
         }
    }
 
