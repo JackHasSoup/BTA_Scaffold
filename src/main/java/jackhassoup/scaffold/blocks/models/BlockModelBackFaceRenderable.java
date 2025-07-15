@@ -34,16 +34,15 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
 
             //somethingRendered |= renderBlocks.renderSide(tessellator, blockModel, bounds, x, y, z, r, g, b, side, meta);
             //inset backface bounds by tiny amount to prevent Z-fighting with adjacent blocks
-            double inv99 = -1.0101010101;
-            AABB insetBounds = AABB.getTemporaryBB(
-                bounds.minX*(side.getOffsetX() != 0 ? inv99 * side.getOffsetX() : 1.0),
-                bounds.minY*(side.getOffsetY() != 0 ? inv99 * side.getOffsetY() : 1.0), 
-                bounds.minZ*(side.getOffsetZ() != 0 ? inv99 * side.getOffsetZ() : 1.0), 
-                bounds.maxX*(side.getOffsetX() != 0 ? 0.99 * side.getOffsetX() : 1.0), 
-                bounds.maxY*(side.getOffsetY() != 0 ? 0.99 * side.getOffsetY() : 1.0), 
-                bounds.maxZ*(side.getOffsetZ() != 0 ? 0.99 * side.getOffsetZ() : 1.0)
-                );
             
+            AABB insetBounds = AABB.getTemporaryBB(
+                bounds.minX - (0.01 * side.getOffsetX()),
+                bounds.minY - (0.01 * side.getOffsetY()),
+                bounds.minZ - (0.01 * side.getOffsetZ()),
+                bounds.maxX - (0.01 * side.getOffsetX()),
+                bounds.maxY - (0.01 * side.getOffsetY()),
+                bounds.maxZ - (0.01 * side.getOffsetZ())
+                );
             somethingRendered |= this.renderBackface(tessellator, blockModel, insetBounds, x, y, z, r, g, b, side, meta, side.getOffsetX(), side.getOffsetY(), side.getOffsetZ());
         }
         renderBlocks.enableAO = false;
