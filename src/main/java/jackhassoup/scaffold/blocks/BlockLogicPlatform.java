@@ -10,6 +10,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
+import turniplabs.halplibe.helper.EnvironmentHelper;
 
 public class BlockLogicPlatform extends BlockLogicRightClickExpandable{
 
@@ -81,7 +82,7 @@ public class BlockLogicPlatform extends BlockLogicRightClickExpandable{
 
     @Override
     public boolean collidesWithEntity(Entity entity, World world, int x, int y, int z) {
-        if(entity instanceof PlayerLocal && ((PlayerLocal)entity).input == null) return false;
+        if(!EnvironmentHelper.isServerEnvironment()){if(entity instanceof PlayerLocal && ((PlayerLocal)entity).input == null) return false;}
         if(canDrop(entity)) return false;
 
         return entity.y - entity.heightOffset > y;
