@@ -1,5 +1,6 @@
 package jackhassoup.scaffold.blocks.models;
 
+import net.minecraft.client.render.LightmapHelper;
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelTransparent;
 import net.minecraft.client.render.tessellator.Tessellator;
@@ -31,7 +32,7 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
         boolean somethingRendered = false;
         for (Side side : Side.sides) {
 
-            somethingRendered |= renderBlocks.renderSide(tessellator, blockModel, bounds, x, y, z, r, g, b, side, meta);
+            //somethingRendered |= renderBlocks.renderSide(tessellator, blockModel, bounds, x, y, z, r, g, b, side, meta);
             somethingRendered |= this.renderBackface(tessellator, blockModel, bounds, x, y, z, r, g, b, side, meta, side.getOffsetX(), side.getOffsetY(), side.getOffsetZ());
         }
         renderBlocks.enableAO = false;
@@ -69,10 +70,23 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
         double d13 = y + bounds.minY;
         double d14 = z + bounds.minZ;
         double d15 = z + bounds.maxZ;
-        tessellator.setColorOpaque_F(r, g, b);
+
+        boolean le = LightmapHelper.isLightmapEnabled();
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d12, d13, d15, d4, d6);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d12, d13, d14, d4, d5);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d11, d13, d14, d3, d5);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d11, d13, d15, d3, d6);
     }
 
@@ -87,10 +101,23 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
         double d13 = y + bounds.maxY;
         double d14 = z + bounds.minZ;
         double d15 = z + bounds.maxZ;
-        tessellator.setColorOpaque_F(r, g, b);
+
+        boolean le = LightmapHelper.isLightmapEnabled();
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d11, d13, d15, d3, d6);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d11, d13, d14, d3, d5);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d12, d13, d14, d4, d5);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d12, d13, d15, d4, d6);
     }
 
@@ -105,10 +132,23 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
         double d14 = y + bounds.minY;
         double d15 = y + bounds.maxY;
         double d16 = z + bounds.minZ;
-        tessellator.setColorOpaque_F(r, g, b);
+        
+        boolean le = LightmapHelper.isLightmapEnabled();
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d12, d14, d16, d4, d6);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d13, d14, d16, d3, d6);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d13, d15, d16, d3, d5);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d12, d15, d16, d4, d5);
     }
 
@@ -123,10 +163,24 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
         double y0 = y + bounds.minY;
         double y1 = y + bounds.maxY;
         double z0 = z + bounds.maxZ;
-        tessellator.setColorOpaque_F(r, g, b);
+        
+        
+        boolean le = LightmapHelper.isLightmapEnabled();
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(x1, y1, z0, d4, d5);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(x1, y0, z0, d4, d6);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(x0, y0, z0, d3, d6);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(x0, y1, z0, d3, d5);
     }
 
@@ -141,11 +195,23 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
         double d14 = y + bounds.maxY;
         double d15 = z + bounds.minZ;
         double d16 = z + bounds.maxZ;
-        tessellator.setColorOpaque_F(r, g, b);
-        // Reverse winding compared to the front face:
+
+        boolean le = LightmapHelper.isLightmapEnabled();
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d12, d13, d15, d3, d6); // bottom-left
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d12, d14, d15, d3, d5); // top-left
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d12, d14, d16, d4, d5); // top-right
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(d12, d13, d16, d4, d6); // bottom-right
     }
 
@@ -160,10 +226,23 @@ public class BlockModelBackFaceRenderable<T extends BlockLogic> extends BlockMod
         double yMax = y + bounds.maxY;
         double zMin = z + bounds.minZ;
         double zMax = z + bounds.maxZ;
-        tessellator.setColorOpaque_F(r, g, b);
+        
+        boolean le = LightmapHelper.isLightmapEnabled();
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(xMax, yMax, zMax, uMin, vMin);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomLeft);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(xMax, yMax, zMin, uMax, vMin);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordBottomRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(xMax, yMin, zMin, uMax, vMax);
+
+        if(le)tessellator.setLightmapCoord(renderBlocks.lightmapCoordTopRight);
+        tessellator.setColorOpaque_F(renderBlocks.colorRedTopLeft, renderBlocks.colorGreenTopLeft, renderBlocks.colorBlueTopLeft);
         tessellator.addVertexWithUV(xMax, yMin, zMax, uMin, vMax);
     }
 }
