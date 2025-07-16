@@ -87,7 +87,7 @@ public class BlockLogicPlatform extends BlockLogicRightClickExpandable{
         
         //if entity trying to jump up, boost them
         boolean entityAbove = entity.y - entity.heightOffset > y;
-        if(!entityAbove ){entity.yd *= 1.065;}
+        if(!entityAbove && entity.yd < 0.5){entity.yd *= 1.065;}
 
         return entityAbove;
     }
