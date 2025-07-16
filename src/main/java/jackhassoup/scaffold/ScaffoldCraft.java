@@ -74,89 +74,67 @@ public class ScaffoldCraft implements RecipeEntrypoint{
         .create("scaffoldSteelCraft", new ItemStack(ScaffoldBlocks.SCAFFOLD_STEEL, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Items.CLOTH)
         .create("platformClothCraft", new ItemStack(ScaffoldBlocks.PLATFORM_CLOTH, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Blocks.MESH)
         .create("platformMeshCraft", new ItemStack(ScaffoldBlocks.PLATFORM_MESH, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Blocks.MESH_GOLD)
         .create("platformMeshGoldCraft", new ItemStack(ScaffoldBlocks.PLATFORM_MESH_GOLD, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Blocks.BRICK_BASALT)
         .create("platformBasaltCraft", new ItemStack(ScaffoldBlocks.PLATFORM_BRICK_BASALT, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Blocks.BRICK_CLAY)
         .create("platformBrickCraft", new ItemStack(ScaffoldBlocks.PLATFORM_BRICK_CLAY, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Blocks.BRICK_GRANITE)
         .create("platformGraniteCraft", new ItemStack(ScaffoldBlocks.PLATFORM_BRICK_GRANITE, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Blocks.BRICK_LIMESTONE)
         .create("platformLimestoneCraft", new ItemStack(ScaffoldBlocks.PLATFORM_BRICK_LIMESTONE, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Blocks.BRICK_MARBLE)
         .create("platformMarbleCraft", new ItemStack(ScaffoldBlocks.PLATFORM_BRICK_MARBLE, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Blocks.BRICK_STONE_POLISHED)
         .create("platformPolishedStoneCraft", new ItemStack(ScaffoldBlocks.PLATFORM_BRICK_POLISHED_STONE, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Blocks.BRICK_SLATE)
         .create("platformSlateCraft", new ItemStack(ScaffoldBlocks.PLATFORM_BRICK_SLATE, ScaffoldConfig.scaffoldCraftAmount ));
 
         RecipeBuilder.Shaped(ScaffoldMod.MOD_ID)
-        .setShape("S")
-        .setShape("B")
-        .setShape("S")
+        .setShape("S", "B", "S")
         .addInput('S', Items.STICK)
         .addInput('B', Blocks.BRICK_STONE)
         .create("platformStoneCraft", new ItemStack(ScaffoldBlocks.PLATFORM_BRICK_STONE, ScaffoldConfig.scaffoldCraftAmount ));
