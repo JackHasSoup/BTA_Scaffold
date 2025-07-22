@@ -10,6 +10,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
+import net.minecraft.server.entity.player.PlayerServer;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
 public class BlockLogicScaffolding extends BlockLogicRightClickExpandable {
@@ -47,14 +48,14 @@ public class BlockLogicScaffolding extends BlockLogicRightClickExpandable {
     public AABB getCollisionBoundingBoxFromPool(WorldSource world, int x, int y, int z) {
         if (world.getBlockMaterial(x, y + 1, z) != Material.air && world.getBlockMaterial(x, y - 1, z) != Material.air) {
             // block above and below, do not allow stand so player can fall through
-            return null;
+            return AABB.getTemporaryBB(0,0,0,0,0,0);
         }
         // default, top face collision
         return AABB.getTemporaryBB(x, y + 0.99F, z, x + 1, y + 1, z + 1);
         // return AABB.getTemporaryBB(x + 0.3F, y, z + 0.3F, x + 0.7F, y + 1, z + 0.7F);
     }
 
-    @Override @Environment(EnvType.CLIENT)
+    @Override
     public boolean collidesWithEntity(Entity entity, World world, int x, int y, int z) {
         if(!EnvironmentHelper.isServerEnvironment()){if(entity instanceof PlayerLocal && ((PlayerLocal)entity).input == null) return false;}
         
