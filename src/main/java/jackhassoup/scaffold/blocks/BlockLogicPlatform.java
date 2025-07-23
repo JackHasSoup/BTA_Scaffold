@@ -82,11 +82,17 @@ public class BlockLogicPlatform extends BlockLogicRightClickExpandable{
 
     @Override
     public boolean collidesWithEntity(Entity entity, World world, int x, int y, int z) {
-        if(!EnvironmentHelper.isServerEnvironment()){if(entity instanceof PlayerLocal && ((PlayerLocal)entity).input == null) return false;}
+        boolean entityAbove = true;
+        if(!EnvironmentHelper.isServerEnvironment()){
+            if(entity instanceof PlayerLocal && ((PlayerLocal)entity).input == null) return false;
+            entityAbove = entity.y - entity.heightOffset > y;
+        }
+        else{
+             entityAbove = entity.y > y+1;
+        }
         if(canDrop(entity)) return false;
         
         //if entity trying to jump up, boost them
-        boolean entityAbove = entity.y - entity.heightOffset > y;
         if(!entityAbove && entity.yd < 0.5){entity.yd *= 1.065;}
 
         return entityAbove;

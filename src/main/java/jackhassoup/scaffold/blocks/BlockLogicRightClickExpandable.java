@@ -151,7 +151,7 @@ public class BlockLogicRightClickExpandable extends BlockLogicTransparent{
             if (dist > maxSpan) continue;
             // Check if directly supported by non-air block below
             if (!supportHorizontal) {
-                if (world.getBlockMaterial(cx, cy - 1, cz).isSolid()) {
+                if (world.getBlockMaterial(cx, cy - 1, cz).isSolid() || world.getBlockId(cx, cy-1, cz) == id()) {
                     return true;
                 }
             } else if (supportHorizontal) {

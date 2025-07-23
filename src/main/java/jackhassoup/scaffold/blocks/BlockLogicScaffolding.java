@@ -1,5 +1,9 @@
 package jackhassoup.scaffold.blocks;
 
+import static jackhassoup.scaffold.ScaffoldMod.MOD_ID;
+
+import org.slf4j.LoggerFactory;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.entity.player.PlayerLocal;
@@ -48,7 +52,7 @@ public class BlockLogicScaffolding extends BlockLogicRightClickExpandable {
     public AABB getCollisionBoundingBoxFromPool(WorldSource world, int x, int y, int z) {
         if (world.getBlockMaterial(x, y + 1, z) != Material.air && world.getBlockMaterial(x, y - 1, z) != Material.air) {
             // block above and below, do not allow stand so player can fall through
-            return null;
+            return AABB.getTemporaryBB(0,0,0,0,0,0);
         }
         // default, top face collision
         return AABB.getTemporaryBB(x, y + 0.99F, z, x + 1, y + 1, z + 1);
@@ -58,7 +62,8 @@ public class BlockLogicScaffolding extends BlockLogicRightClickExpandable {
     public boolean collidesWithEntity(Entity entity, World world, int x, int y, int z) {
         if(!EnvironmentHelper.isServerEnvironment()){if(entity instanceof PlayerLocal && ((PlayerLocal)entity).input == null) return false;}
         else{
-            return !entity.isSneaking()  && entity.y > y;
+            if(entity.isSneaking() && world.getBlockMaterial(x, y - 1, z) == Material.air) return true;
+            return !entity.isSneaking()  && entity.y > y+1;
         }
         
         if(entity.isSneaking() && world.getBlockMaterial(x, y - 1, z) == Material.air) return true;
